@@ -48,3 +48,13 @@ macro_rules! try_result {
         }
     };
 }
+
+#[macro_export]
+macro_rules! flow_control {
+    ($e:expr) => {
+        match $e {
+            std::ops::ControlFlow::Break(result) => return result,
+            std::ops::ControlFlow::Continue(value) => value,
+        }
+    };
+}
